@@ -14,7 +14,7 @@ public class UDPReceive {
             DatagramPacket dp = new DatagramPacket(b,b.length);
             ds.receive(dp);
 
-            System.out.println(new String(b));
+            System.out.println(new String(dp.getData(),0,dp.getLength()));
         }
        //直接用死循环来让它不停的获取数据，就不关闭这个口了
     }
