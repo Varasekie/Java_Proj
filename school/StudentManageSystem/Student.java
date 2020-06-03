@@ -45,7 +45,7 @@ public class Student extends Person {
     }
 
     public String toString() {
-        return super.toString() +","+ this.speciality +","+ this.academy +","+ this.number + ","+this.policy +","+ "团员";
+        return super.toString() +","+ this.speciality +","+ this.academy +","+ this.number + ","+this.policy +"团员";
     }
 
 //    public static void main(String[] args) {

@@ -12,10 +12,9 @@ public class PersonJFrame extends JFrame implements ActionListener, ListSelectio
     protected DefaultListModel<Person> listModel;
     protected PersonJPanel personJPanel;
     protected JComboBox[] comboxs;
-    private static Equalable[] equalables = {new EqualName(), new EqualBirth(),new EqualProvince(),new EqualCity()};
+    protected static Equalable[] equalables = {new EqualName(), new EqualBirth(), new EqualProvince(), new EqualCity()};
 
-    //这里有没有什么好一点的解决办法？不用改personJFrame的static
-    private static Comparator[] comparators = {new CompareName(), new CompareBirth(),new CompareProvince(),new CompareCity()};
+    protected static Comparator[] comparators = {new CompareName(), new CompareBirth(), new CompareProvince(), new CompareCity()};
 
     public PersonJFrame(Person[] pers) {
         this(pers, new PersonJPanel());
@@ -50,7 +49,7 @@ public class PersonJFrame extends JFrame implements ActionListener, ListSelectio
 
         JPanel cmdPanel = new JPanel();//命令面板的操作
         right.add(cmdPanel, "South");
-        String[][] cmd = {{"增加项", "删除左边面板上的项", "删除选中项"}, {"查找选中项", "排列组合框"}, {"姓名", "出生日期"}};
+        String[][] cmd = {{"增加项", "删除左边面板上的项", "删除选中项"}, {"查找选中项", "排列组合框"}, {"姓名", "出生日期", "省份", "城市"}};
         for (int i = 0; i < cmd.length; i++) {
             JButton button = new JButton(cmd[0][i]);
             button.addActionListener(this);
@@ -90,11 +89,15 @@ public class PersonJFrame extends JFrame implements ActionListener, ListSelectio
             if (e.getSource() == this.comboxs[0]) {
                 //查找
                 int i = this.comboxs[0].getSelectedIndex();
-                selectAll(this.listModel, this.jList, this.personJPanel.get(), equalables[i]);
+                if (i < equalables.length) {
+                    selectAll(this.listModel, this.jList, this.personJPanel.get(), equalables[i]);
+                }
             } else if (e.getSource() == this.comboxs[1]) {
                 //排序
                 int i = this.comboxs[1].getSelectedIndex();
-                sort(this.listModel, comparators[i]);
+                if (i < comparators.length) {
+                    sort(this.listModel, comparators[i]);
+                }
             }
         }
     }
@@ -107,8 +110,7 @@ public class PersonJFrame extends JFrame implements ActionListener, ListSelectio
 
             //这边能不能直接实现 能一下删除所有名字匹配的对象啊？####
             boolean remove = this.listModel.removeElement(obj);
-            JOptionPane.showMessageDialog(this, remove ? "seccess" : "fail");
-
+            JOptionPane.showMessageDialog(this, remove ? "seccess" : "找不到"+obj.toString());
         }
     }
 
@@ -122,7 +124,7 @@ public class PersonJFrame extends JFrame implements ActionListener, ListSelectio
                 JOptionPane.showMessageDialog(this, "请选中列表框中的项");
             } else {
                 String string = this.jList.getSelectedValue().toString();
-                if (JOptionPane.showConfirmDialog(this, "删除第" + (i+1) + "项？",
+                if (JOptionPane.showConfirmDialog(this, "删除第" + (i + 1) + "项？",
                         "确认", JOptionPane.YES_NO_OPTION) == 0) {
                     this.listModel.removeElementAt(i);
                 }
@@ -148,14 +150,14 @@ public class PersonJFrame extends JFrame implements ActionListener, ListSelectio
             for (int j = i + 1; j < listModel.getSize(); j++) {
 //                System.out.println("222");
 //                System.out.println((T) listModel.getElementAt(j));
-                if (comparator.compare((T) listModel.getElementAt(j),(T) listModel.getElementAt(min)) < 0) {
+                if (comparator.compare((T) listModel.getElementAt(j), (T) listModel.getElementAt(min)) < 0) {
 //                    System.out.println("333");
                     min = j;
                 }
             }
             if (min != i) {
                 T temp = (T) listModel.getElementAt(i);
-                listModel.setElementAt( (T) listModel.getElementAt(min), i);
+                listModel.setElementAt((T) listModel.getElementAt(min), i);
                 listModel.setElementAt(temp, min);
             }
         }

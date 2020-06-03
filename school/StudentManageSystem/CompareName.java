@@ -37,3 +37,26 @@ class CompareCity implements Comparator<Person> {
         return o1.city.compareTo(o2.city);
     }
 }
+
+class ComparePolicy implements Comparator<Student> {
+    @Override
+    public int compare(Student o1, Student o2) {
+        return o1.policy.compareTo(o2.policy);
+    }
+}
+
+class CompareAcademy implements Comparator<Student> {
+
+    @Override
+    public int compare(Student o1, Student o2) {
+        return o1.academy.compareTo(o2.academy);
+    }
+}
+
+class CompareSpeciality implements Comparator<Student> {
+
+    @Override
+    public int compare(Student o1, Student o2) {
+        return o1.speciality.compareTo(o2.speciality);
+    }
+}

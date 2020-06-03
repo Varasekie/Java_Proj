@@ -15,13 +15,14 @@ public class test {
         };
 
         Student[] students = {
-                new Student("张三",new MyDate(2001,2,1),"男","江苏","苏州","计算机","大数据","001","是"),
-                new Student("李四",new MyDate(2000,2,1),"女","江苏","南京","计算机","计嵌","003","不是"),
-                new Student("abc",new MyDate(2002,2,1),"男","江苏","苏州","计算机","数嵌","005","是"),
-                new Student("王五",new MyDate(2003,2,4),"女","江苏","","计算机","大数据","007","不是"),
+                new Student("z张三",new MyDate(2001,2,1),"男","江苏","苏州","计算机","大数据","001","是"),
+                new Student("l李四",new MyDate(2000,2,1),"女","江苏","南京","计算机","计嵌","003","不是"),
+                new Student("a测试",new MyDate(2002,2,1),"男","江苏","苏州","计算机","数嵌","005","是"),
+                new Student("w王五",new MyDate(2003,2,4),"女","江苏","","自动化","自动化","007","不是"),
+                new Student("w王五",new MyDate(2003,2,4),"女","江苏","","计算机","大数据","007","不是"),
 
         };
-///        new PersonJFrame(ps,new PersonJPanel());
+        new PersonJFrame(ps,new PersonJPanel());
         new StudentJFrame(students,new StudentJPanel());
     }
 }
