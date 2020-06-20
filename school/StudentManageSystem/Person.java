@@ -112,7 +112,7 @@ public class Person implements Comparable<Person> {
     }
 
     public String toString() {
-        return this.name + " birthday" + birthday.toString() + this.gender + this.province + this.city;
+        return this.name + "    出生日期" + birthday.toString() + " " + this.gender + " " + this.province + " " + this.city;
     }
 
     public void finalize() {

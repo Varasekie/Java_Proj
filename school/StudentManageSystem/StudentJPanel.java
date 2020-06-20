@@ -9,18 +9,24 @@ import java.awt.event.ActionListener;
 
 public class StudentJPanel extends PersonJPanel {
 
-    private JTextField text_number, text_academy, text_speciality;
     private JRadioButton[] policy;
+    private String[] str = {"学号","系","专业"};
+    private JPanel[] jPanels = new JPanel[str.length];
+    private JTextField[] jTextFields = new JTextField[str.length];
 
     public StudentJPanel() {
-
+        super();
         this.setLayout(new GridLayout(9, 1));
         this.setBorder(new TitledBorder("学生"));
-        this.add(this.text_number = new JTextField("202190301"));
-        this.add(this.text_academy = new JTextField("系"));
-        this.text_academy.addActionListener(this);
-        this.add(this.text_speciality = new JTextField("大数据"));
-        this.text_speciality.addActionListener(this);
+
+        for (int i = 0;i<str.length;i++){
+            this.jPanels[i]=new JPanel(new GridLayout(1,2));
+            this.jPanels[i].add(new JLabel(str[i]));
+            this.jPanels[i].add(jTextFields[i] = new JTextField(""));
+            this.add(jPanels[i]);
+        }
+
+
 
         //团员
         JPanel poli = new JPanel(new GridLayout(1, 3));
@@ -39,33 +45,30 @@ public class StudentJPanel extends PersonJPanel {
         this.setVisible(true);
     }
 
-
-
     public void set(Person p){
         super.set(p);
         if (p instanceof Student){
             Student s = (Student)p;
-            this.text_number.setText(s.number);
-            this.text_academy.setText(s.academy);
-            this.text_speciality.setText(s.speciality);
+            this.jTextFields[0].setText(s.number);
+            this.jTextFields[1].setText(s.academy);
+            this.jTextFields[2].setText(s.speciality);
             if (s.policy.equals("是")){
                 this.policy[0].setSelected(true);
             }else this.policy[1].setSelected(true);
         }
-
     }
 
     public Student get() {
-
         //重新写另一个函数？可不可以并成一个啊//完成了，并成一个了6.2//22:52
         //number
         try {
-            //免得出现20219yy的现象吧
-            int num = Integer.parseInt(this.text_number.getText());
+            int num = Integer.parseInt(this.jTextFields[0].getText());
             String poli = policy[0].isSelected() ? policy[0].getText() : policy[1].getText();
-            return new Student(super.get(), this.text_academy.getText(), this.text_speciality.getText(), this.text_number.getText(), poli);
+            return new Student(super.get(), this.jTextFields[1].getText(), this.jTextFields[2].getText(), this.jTextFields[0].getText(), poli);
         } catch (NumberFormatException ex2) {
             JOptionPane.showMessageDialog(this, ex2.getMessage() + "不能变成整数");
+        }catch (NullPointerException ex1){
+
         }
         return null;
     }

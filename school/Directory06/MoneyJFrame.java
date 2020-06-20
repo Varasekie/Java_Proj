@@ -13,7 +13,7 @@ public class MoneyJFrame extends JFrame implements CaretListener, ComponentListe
 
     public MoneyJFrame() {
         super("daxiejine");
-        this.setBounds(300, 240, 360, 110);
+        this.setBounds(300, 240, 519, 102);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.addComponentListener(this);
 
@@ -59,6 +59,7 @@ public class MoneyJFrame extends JFrame implements CaretListener, ComponentListe
     public void componentResized(ComponentEvent e) {
         Component c = e.getComponent();
         int size = (c.getWidth() + c.getHeight()) / 40;
+//        System.out.println(size);
         Font f = new Font("宋体", 1, size);
         if (c instanceof JFrame) {
             int n = this.getComponentCount();
@@ -92,11 +93,15 @@ public class MoneyJFrame extends JFrame implements CaretListener, ComponentListe
             this.money.setText("");
         } else try {
             double x = Double.parseDouble(money);
-            System.out.println(RMB.toString(x));
+//            System.out.println(RMB.toString(x));
             this.text_str.setText(RMB.toString(x));
         } catch (Exception e1) {
             this.jdialog.show("\"" + "cannot be the china" + "\"");
 //            System.out.println(e1);
         }
+    }
+
+    public static void main(String[] args) {
+        new MoneyJFrame();
     }
 }

@@ -110,7 +110,7 @@ public class PersonJFrame extends JFrame implements ActionListener, ListSelectio
 
             //这边能不能直接实现 能一下删除所有名字匹配的对象啊？####
             boolean remove = this.listModel.removeElement(obj);
-            JOptionPane.showMessageDialog(this, remove ? "seccess" : "找不到"+obj.toString());
+            JOptionPane.showMessageDialog(this, remove ? "seccess" : "找不到" + obj.toString());
         }
     }
 
@@ -133,34 +133,37 @@ public class PersonJFrame extends JFrame implements ActionListener, ListSelectio
     }
 
     public <T> void selectAll(DefaultListModel<T> listModel, JList<? super T> jList, T key, Equalable<? super T> equalable) {
-        int n = listModel.getSize();//for循环的末尾吧
-        for (int i = 0; i < n; i++) {
-            if (equalable.equals(key, (T) listModel.getElementAt(i))) {
-                jList.addSelectionInterval(i, i);//添加选中第i项
+        try {
+            int n = listModel.getSize();//for循环的末尾吧
+            for (int i = 0; i < n; i++) {
+                if (equalable.equals(key, (T) listModel.getElementAt(i))) {
+                    jList.addSelectionInterval(i, i);//添加选中第i项
+                }
             }
-        }
-
+        }catch (NullPointerException e){}
     }
 
     //排序算法（把person的复制粘贴了orz
     public <T> void sort(DefaultListModel<? super T> listModel, Comparator<? super T> comparator) {
-        for (int i = 0; i < listModel.getSize() - 1; i++) {
-            int min = i;
+        try {
+            for (int i = 0; i < listModel.getSize() - 1; i++) {
+                int min = i;
 //            System.out.println("111");
-            for (int j = i + 1; j < listModel.getSize(); j++) {
+                for (int j = i + 1; j < listModel.getSize(); j++) {
 //                System.out.println("222");
 //                System.out.println((T) listModel.getElementAt(j));
-                if (comparator.compare((T) listModel.getElementAt(j), (T) listModel.getElementAt(min)) < 0) {
+                    if (comparator.compare((T) listModel.getElementAt(j), (T) listModel.getElementAt(min)) < 0) {
 //                    System.out.println("333");
-                    min = j;
+                        min = j;
+                    }
+                }
+                if (min != i) {
+                    T temp = (T) listModel.getElementAt(i);
+                    listModel.setElementAt((T) listModel.getElementAt(min), i);
+                    listModel.setElementAt(temp, min);
                 }
             }
-            if (min != i) {
-                T temp = (T) listModel.getElementAt(i);
-                listModel.setElementAt((T) listModel.getElementAt(min), i);
-                listModel.setElementAt(temp, min);
-            }
-        }
+        }catch (NullPointerException e){}
     }
 
     @Override

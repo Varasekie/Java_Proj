@@ -27,8 +27,8 @@ public class Student extends Person {
     public void set(String academy, String speciality, String number, String policy) {
         this.academy = academy == null ? "" : academy;
         this.speciality = academy == null ? "" : speciality;
-        this.number = number == null?"":number;
-        this.policy= policy == null?"":policy;
+        this.number = number == null ? "" : number;
+        this.policy = policy == null ? "" : policy;
     }
 
     @Override
@@ -45,7 +45,7 @@ public class Student extends Person {
     }
 
     public String toString() {
-        return super.toString() +","+ this.speciality +","+ this.academy +","+ this.number + ","+this.policy +"团员";
+        return super.toString() + "," + this.academy + "," + this.speciality + "," + this.number + "," + this.policy + "团员";
     }
 
 //    public static void main(String[] args) {

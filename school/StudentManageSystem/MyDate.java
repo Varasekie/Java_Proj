@@ -10,21 +10,21 @@ public class MyDate implements Comparable<MyDate> {
         thisYear = 2020;
     }
 
-    public MyDate(int year, int month, int date) {
-        this.year = year;
-        this.month = month;
-        this.date = date;
+    public MyDate(int year, int month, int date) throws DateFormatException {
+        set(year, month, date);
     }
 
-    public MyDate(String string){
-        String[] sp = {"年","月","日"};
+    //注意这里用的跟老师的不一样
+    public MyDate(String string) throws DateFormatException {
+        String[] sp = {"年", "月", "日"};
         //split函数切割字符串
         String[] data_year = string.split(sp[0]);
         String[] data_month = data_year[1].split(sp[1]);
         String[] data_day = data_month[1].split(sp[2]);
-        this.year = Integer.parseInt(data_year[0]);
-        this.month = Integer.parseInt(data_month[0]);
-        this.date = Integer.parseInt(data_day[0]);
+        int y = Integer.parseInt(data_year[0]);
+        int m = Integer.parseInt(data_month[0]);
+        int d = Integer.parseInt(data_day[0]);
+        this.set(y, m, d);
     }
 
     //指定缺省日期
@@ -40,10 +40,22 @@ public class MyDate implements Comparable<MyDate> {
     }
 
     //设置日期
-    void set(int year, int month, int date) {
-        this.date = (date >= 1 && date <= 31) ? date : 1;
-        this.month = (month >= 1 && month <= 12) ? month : 1;
+    void set(int year, int month, int date) throws DateFormatException {
+//        this.date = (date >= 1 && date <= 31) ? date : 1;
+//        this.month = (month >= 1 && month <= 12) ? month : 1;
+//        this.year = year;
+        if (year <= -2000 || year >= 2500) {
+            throw new DateFormatException(year + "年份不合适");
+        }
+        if (month < 1 || month > 12) {
+            throw new DateFormatException(month + "月份不合适");
+        }
+        if (date < 1 || date > MyDate.dayOfMonth(year, month)) {
+            throw new DateFormatException(date + "日期不合适");
+        }
         this.year = year;
+        this.month = month;
+        this.date = date;
     }
 
     //重载

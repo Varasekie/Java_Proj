@@ -64,7 +64,7 @@ public class PersonJPanel extends JPanel implements ActionListener {
             JOptionPane.showMessageDialog(this, ex1.getMessage());
         } catch (NumberFormatException ex2) {
             JOptionPane.showMessageDialog(this, ex2.getMessage() + "不转化成整数");
-        }
+        }catch (NullPointerException ex3){}
         return null;
     }
 

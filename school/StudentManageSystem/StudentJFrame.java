@@ -7,10 +7,9 @@ import java.util.Comparator;
 
 public class StudentJFrame extends PersonJFrame {
 
-    protected static Equalable[] equalable = {new EqualNumber(),new EqualPolity(),new EqualAcademy(),new EqualSpeciality()};
+    protected static Equalable[] equalable = {new EqualNumber(), new EqualPolity(), new EqualAcademy(), new EqualSpeciality()};
     protected static Comparator[] comparator = {new CompareNumber(), new ComparePolicy(), new CompareAcademy(), new CompareSpeciality()};
 
-    protected StudentJPanel StudentJPanel;
 
 //    public StudentJFrame(Student [] stus) {
 //        super(stus,new StudentJPanel());
@@ -22,13 +21,15 @@ public class StudentJFrame extends PersonJFrame {
         this.setSize(900, 340);
         this.setTitle("学生管理系统");
         //查找里面加一个（不用监听吗？
-        String[] str = {"学号","是否团员","院系","专业"};
+        String[] str = {"学号", "是否团员", "院系", "专业"};
 
         //给排序添加选择
-        for (int i = 0;i<str.length;i++){
+        for (int i = 0; i < str.length; i++) {
             this.comboxs[0].addItem(str[i]);
             this.comboxs[1].addItem(str[i]);
         }
+
+        this.setVisible(true);
     }
 
     @Override
@@ -36,21 +37,21 @@ public class StudentJFrame extends PersonJFrame {
         super.actionPerformed(e);
         if (e.getSource() instanceof JComboBox) {
             //这两种表达方式应该都行吧，我更倾向于Item
-            if (e.getSource() == this.comboxs[0]){
+            if (e.getSource() == this.comboxs[0]) {
                 int i = this.comboxs[0].getSelectedIndex();
-                if (i >=equalables.length){
-                    selectAll(this.listModel, this.jList, this.personJPanel.get(), equalable[i-equalables.length]);
+                if (i >= equalables.length) {
+                    selectAll(this.listModel, this.jList, this.personJPanel.get(), equalable[i - equalables.length]);
                 }
             }
 //            if (e.getSource() == this.comboxs[0] && this.comboxs[0].getSelectedIndex() == 4) {
 //                selectAll(this.listModel, this.jList, (Student) this.personJPanel.get(), new EqualNumber());
 //
 //            }
-            if (e.getSource() == this.comboxs[1]){
+            if (e.getSource() == this.comboxs[1]) {
                 int j = this.comboxs[1].getSelectedIndex();
                 if (j >= comparators.length) {
-                    sort(this.listModel, comparator[j-comparators.length]);
-                    System.out.println(comparator[j-comparators.length].toString());
+                    sort(this.listModel, comparator[j - comparators.length]);
+//                    System.out.println(comparator[j-comparators.length].toString());
                 }
             }
         }
